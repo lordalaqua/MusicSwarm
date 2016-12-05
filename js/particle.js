@@ -200,13 +200,6 @@ function updateParticles(particles) {
     particles.forEach((particle,i)=>{
         particle.update(file_fbc_array,i);
         particle.avoidBoundary(cubeSize,cubeSize,cubeSize, 10);
-        ////////////////////////////////////////////////////////////////////////
-        // Lorenzo:
-        // Eu removi aqui o update antigo, mas é aqui que se chamaria o update
-        // do código do affonso
-        // if(!loadedFile)
-        //     updateSound(i, particle);
-        ////////////////////////////////////////////////////////////////////////
     });
     // Update flocking and attraction based on neighbours
     particles.forEach((particle, index)=> {

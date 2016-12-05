@@ -4,6 +4,8 @@ body {
     color: #666;
     overflow-x: hidden;
     box-sizing: border-box;
+    width: 100%;
+    height: 100%;
 }
 
 * {
@@ -28,6 +30,7 @@ canvas {
 
 dt {
     margin-bottom: 0.5em;
+    font-weight: bold;
 }
 dd, p {
     margin-bottom: 1em;
