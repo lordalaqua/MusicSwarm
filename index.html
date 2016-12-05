@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!--link rel="stylesheet" type="text/css" href="css/tabs.css"-->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta charset="UTF-8">
+    <title>Particle Music</title>
+</head>
+<body>
+    <div id="animation" class="tab-hook"></div>
+    <div id="sound" class="tab-hook"></div>
+    <div id="readme" class="tab-hook"></div>
+    <div align="center">
+        <canvas id="canvas">
+        Your browser does not support the HTML5 canvas tag.
+        </canvas>
+    </div>
+    <div id="tabs">
+        <ul class="tab-control">
+            <li><a href="#readme" class="tablinks">About</a></li>
+            <li><a href="#animation" class="tablinks">Control Particles</a></li>
+            <li><a href="#sound" class="tablinks">Control Sound</a></li>
+        </ul>
+
+        <div id="animationCtrl" class="tabcontent">
+        <div class="controls">
+            <div class="formField">
+                <label>
+                    Radius (<span id="radiusAmount">40</span>)
+                </label>
+                <input type="range" min="1" max="500" step="1" value="40" oninput="updateRadius(this.value)">
+            </div>
+            <div class="formField">
+                <label>
+                    Attraction (<span id="attractionAmount">1</span>)
+                </label>
+                <input type="range" min="0" max="500" step="1" value="1" oninput="updateAttraction(this.value)">
+            </div>
+            <div class="formField">
+                <label>
+                    Flocking (<span id="flockingAmount">0</span>)
+                </label>
+                <input type="range"  min="0" max="500" step="1" value="0" oninput="updateFlocking(this.value)">
+            </div>
+            <div class="formField">
+                <label>
+                    Repellency (<span id="repellencyAmount">0</span>)
+                </label>
+                <input type="range" min="0" max="300" step="1" value="0" oninput="updateRepellency(this.value)">
+            </div>
+            <div class="formField">
+                <label>
+                    Velocity (<span id="velocityAmount">500</span>)
+                </label>
+                <input type="range" min="1" max="1000" step="1" value="500" oninput="updateVelocity(this.value)">
+            </div>
+            <div class="formField">
+                <label>
+                    Random (<span id="randomAmount">400</span>)
+                </label>
+                <input type="range"min="0" max="1000" step="1" value="400" oninput="updateRandom(this.value)">
+            </div>
+            <div class="formField">
+                <label>
+                    Damping (<span id="dampingAmount">0</span>)
+                </label>
+                <input type="range" min="0" max="100" step="1" value="0" oninput="updateDamping(this.value)">
+            </div>
+            <div class="formField">
+                <label>
+                    Size (<span id="sizeAmount">1</span>)
+                </label>
+                <input type="range" min="1" max="5" step="0.1" value="1" oninput="updateSize(this.value)">
+            </div>
+            <div class="formField">
+                <label>
+                    Tail (<span id="tailAmount">5</span>)
+                </label>
+                <input type="range" min="1" max="100" step="1" value="5" oninput="updateTail(this.value)">
+            </div>
+            <div class="formField toggles">
+                <label>
+                Show Boundaries
+                <input name="cube" type="checkbox" onchange="showCube(this.checked)">
+                </label>
+            </div>
+            <div class="formField toggles">
+                <span style="margin-right: 10px;">
+                    Colors
+                </span>
+                <label>
+                <input name="colors" type="radio" value="random" onchange="selectColors(this.value,this.checked)">
+                Random
+                </label>
+                <label>
+                <input name="colors" type="radio" value="position" onchange="selectColors(this.value,this.checked)" checked>
+                Position
+                </label>
+                <label>
+                <input name="colors" type="radio" value="epilepsy" onchange="selectColors(this.value,this.checked)">
+                Seizure Danger
+                </label>
+            </div>
+            <div class="formField toggles">
+                <span style="margin-right: 10px;">
+                    File Vizualisation Type
+                </span>
+                <label>
+                <input name="vizType" type="radio" value="bars" onchange="selectVizType(this.value,this.checked)" checked>
+                Bars
+                </label>
+                <label>
+                <input name="vizType" type="radio" value="fountain" onchange="selectVizType(this.value,this.checked)">
+                Fountain
+                </label>
+            </div>
+            <div class="formField vertical">
+                <label>
+                    Music File
+                </label>
+                <input type="file" id="file">
+                <span id="fileStatus"></span>
+                <button
+                    id="stopButton"
+                    style="display: none"
+                    onclick="stopSong(this)">
+                    Stop Song
+                </button>
+            </div>
+        </div>
+        </div>
+
+        <div id="soundCtrl" class="tabcontent">
+        <div class="controls">
+
+            <div class="formField">
+                <label>
+                    Slider (<span id="radiusAmount">Opcional update do valor aqui (JS)</span>)
+                </label>
+                <input type="range" min="1" max="500" step="1" value="40" oninput="callback(this.value)">
+            </div>
+
+            <div class="formField toggles">
+                <label>
+                Checkbox (toggle)
+                <input type="checkbox" onchange="callback(this.checked)">
+                </label>
+            </div>
+
+            <div class="formField toggles">
+                <span style="margin-right: 10px;">
+                    Radio Buttons
+                </span>
+                <label>
+                <input name="colors" type="radio" value="random" onchange="callback(this.value,this.checked)">
+                valor 1
+                </label>
+                <label>
+                <input name="colors" type="radio" value="position" onchange="selectColors(this.value,this.checked)" checked>
+                valor 2
+                </label>
+            </div>
+        </div>
+        </div>
+        <!-- Tab com texto de ajuda -->
+        <div id="about" class="tabcontent">
+            <h1>Musical Swarm Simulation</h1>
+        </div>
+
+    </div>
+    <script src="js/lib/three.min.js"></script>
+    <script src="js/lib/OrbitControls.js"></script>
+    <script src="js/globals.js"></script>
+    <script src="js/setup-scene.js"></script>
+    <script src="js/particle.js"></script>
+    <script src="js/ui-callbacks.js"></script>
+    <script src="js/run.js"></script>
+</body>
+</html>
