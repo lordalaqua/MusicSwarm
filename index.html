@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <!--link rel="stylesheet" type="text/css" href="css/tabs.css"-->
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta charset="UTF-8">
     <title>Particle Music</title>
 </head>
 <body>
     <div id="animation" class="tab-hook"></div>
-    <div id="sound" class="tab-hook"></div>
     <div id="readme" class="tab-hook"></div>
     <div align="center">
         <canvas id="canvas">
@@ -20,7 +17,6 @@
         <ul class="tab-control">
             <li><a href="#readme" class="tablinks">About</a></li>
             <li><a href="#animation" class="tablinks">Control Particles</a></li>
-            <li><a href="#sound" class="tablinks">Control Sound</a></li>
         </ul>
 
         <div id="animationCtrl" class="tabcontent">
@@ -57,7 +53,7 @@
             </div>
             <div class="formField">
                 <label>
-                    Random (<span id="randomAmount">400</span>)
+                    Randomness (<span id="randomAmount">400</span>)
                 </label>
                 <input type="range"min="0" max="1000" step="1" value="400" oninput="updateRandom(this.value)">
             </div>
@@ -102,19 +98,6 @@
                 Seizure Danger
                 </label>
             </div>
-            <div class="formField toggles">
-                <span style="margin-right: 10px;">
-                    File Vizualisation Type
-                </span>
-                <label>
-                <input name="vizType" type="radio" value="bars" onchange="selectVizType(this.value,this.checked)" checked>
-                Bars
-                </label>
-                <label>
-                <input name="vizType" type="radio" value="fountain" onchange="selectVizType(this.value,this.checked)">
-                Fountain
-                </label>
-            </div>
             <div class="formField vertical">
                 <label>
                     Music File
@@ -128,44 +111,58 @@
                     Stop Song
                 </button>
             </div>
-        </div>
-        </div>
-
-        <div id="soundCtrl" class="tabcontent">
-        <div class="controls">
-
-            <div class="formField">
-                <label>
-                    Slider (<span id="radiusAmount">Opcional update do valor aqui (JS)</span>)
-                </label>
-                <input type="range" min="1" max="500" step="1" value="40" oninput="callback(this.value)">
-            </div>
-
-            <div class="formField toggles">
-                <label>
-                Checkbox (toggle)
-                <input type="checkbox" onchange="callback(this.checked)">
-                </label>
-            </div>
-
             <div class="formField toggles">
                 <span style="margin-right: 10px;">
-                    Radio Buttons
+                    Song Vizualisation Type
                 </span>
                 <label>
-                <input name="colors" type="radio" value="random" onchange="callback(this.value,this.checked)">
-                valor 1
+                <input name="vizType" type="radio" value="bars" onchange="selectVizType(this.value,this.checked)" checked>
+                Bars
                 </label>
                 <label>
-                <input name="colors" type="radio" value="position" onchange="selectColors(this.value,this.checked)" checked>
-                valor 2
+                <input name="vizType" type="radio" value="fountain" onchange="selectVizType(this.value,this.checked)">
+                Fountain
                 </label>
             </div>
         </div>
         </div>
-        <!-- Tab com texto de ajuda -->
+
         <div id="about" class="tabcontent">
             <h1>Musical Swarm Simulation</h1>
+            <p>
+            This is an experiment with sound synthesizers and a particle flocking/attraction algorithm made for a computer science class at UFRGS (Universidade Federal do Rio Grande do Sul). The algorithm was based on <a target="_blank" href="http://www.inf.ufrgs.br/~johann/jsfs.html">previous work</a> by the class' professor, Marcelo Johann.
+            </p>
+            <p> You can zoom with the mouse wheel, rotate the particles pressing the left mouse button and pan around the 3D space with the right mouse button. The algorithm's parameters are controllable in the other tab, so <a href="#animation">play with them!</a></p>
+            <p>Here is a brief explanation of what each parameter does:</p>
+            <dl>
+                <dt>Radius</dt>
+                <dd>Controls how much particles affect each other, particles will look for neighbors in the specified radius in order to calculate the flocking and attraction behaviors.</dd>
+                <dt>Attraction</dt>
+                <dd>Affects how much particles will attract each other.</dd>
+                <dt>Flocking</dt>
+                <dd>Creates a flocking effect, where particles will tend to move in the same direction.</dd>
+                <dt>Repellency</dt>
+                <dd>The opposite of attraction, makes particles repel each other.</dd>
+                <dt>Velocity</dt>
+                <dd>The magnitue at which the other parameters affect the particles' movement.</dd>
+                <dt>Randomness</dt>
+                <dd>Adds randomness to the particles' movement.</dd>
+                <dt>Damping</dt>
+                <dd>Dampens the effects of other parameters.</dd>
+                <dt>Size</dt>
+                <dd>The radius of each particle's head.</dd>
+                <dt>Tail</dt>
+                <dd>Should affect the length of each particle's tail, but not yet implemented.</dd>
+                <dt>Show Boundaries</dt>
+                <dd>Shows the boundaries to which the particles try to be contained. (Tip: try raising repellency to see this is not always true!)</dd>
+                <dt>Colors</dt>
+                <dd>Changes particle colors, the options are: a random color for each particle, color based on position in 3D space, and a random color every frame. (WARNING: people with epilepsy or similar conditions should avoid this last option)</dd>
+                <dt>Music File</dt>
+                <dd>You can upload a song file (readable by the Web Audio API) and the particles will react to the song data,
+                while still following the previous parameters, making for an interesting music visualization.</dd>
+                <dt>Song visualization mode</dt>
+                <dd>There two visualization modes, named "bars" and "fountain", upload a song, rotate the camera around and see for yourself what they do.</dd>
+            </dl>
         </div>
 
     </div>

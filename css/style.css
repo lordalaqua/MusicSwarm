@@ -26,6 +26,12 @@ canvas {
     display: block;
 }
 
+dt {
+    margin-bottom: 0.5em;
+}
+dd, p {
+    margin-bottom: 1em;
+}
 .tab-control {
     display: flex;
     align-items: center;
@@ -34,20 +40,21 @@ canvas {
     padding: 0;
     height: 30px;
 }
+a {
+    color: #4fbcdd;
+    text-decoration: none;
+}
+a:visited {
+    color: darken(#4fbcdd,50%);
+    text-decoration: none;
+}
+a:focus, a:hover {
+    background: #eee;
+    text-decoration: underline;
+}
 
 .tab-control a {
     padding: 10px;
-    color: #4fbcdd;
-    text-decoration: none;
-}
-.tab-control a:visited {
-    color: #4fbcdd;
-    text-decoration: none;
-}
-
-.tab-control a:focus, .tab-control a:hover {
-    background: #eee;
-    text-decoration: underline;
 }
 
 .tabcontent {
